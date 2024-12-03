@@ -1,7 +1,38 @@
 # 3Weeks-SpringBoot
 3주완성 스프링부트 학습 및 토이 프로젝트 
 
-<br>
+1. 브랜치 컨벤션
+
+    :white_check_mark: FE or BE
+    
+    :white_check_mark: feature, hotfix (master,develop,release는 본프로젝트때 따져서 사용할 예정)
+   <br>
+   
+    ex. fe/feature/login
+    
+2. 커밋 컨벤션
+   
+    :white_check_mark: 메시지 50글자 이내
+   
+    :white_check_mark: 마침표, 특수기호 사용하지 않기
+   
+    :white_check_mark: **하나의 커밋에 변경사항 1개**
+      
+    <br>
+
+     
+    - feat : 새로운 기능 추가
+    - fix : 버그 수정
+    - docs: 문서 수정
+    - style: 코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우
+    - refactor: 코드 리팩토링
+    - test: 테스트 코드, 리팩토링 테스트 코드 추가
+    - chore: 빌드 업무 수정, 패키지 매니저 수정, production code와 무관한 부분들 (.gitignore, build.gradle 같은)
+    - comment: 주석 추가 및 변경
+    - remove: 파일, 폴더 삭제
+    - rename: 파일, 폴더명 수정
+
+   -------
 
 ## Plan 
 #### 12월
