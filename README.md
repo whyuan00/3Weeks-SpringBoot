@@ -3,7 +3,7 @@
 
 1. 브랜치 컨벤션
 
-    :white_check_mark: FE or BE
+    :white_check_mark: fe or be
     
     :white_check_mark: feature, hotfix (master,develop,release는 본프로젝트때 따져서 사용할 예정)
    <br>
