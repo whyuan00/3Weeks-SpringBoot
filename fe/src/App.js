@@ -15,7 +15,6 @@ function App() {
       .get("/todos/")
       .then((res) => {
         setTodos(res.data);
-        console.log(res.data);
       })
       .catch((e) => {
         console.error("todo조회 에러: ", e);
