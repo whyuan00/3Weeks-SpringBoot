@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 전체 컴포넌트 기본설정 */
 body {
   background-color: theme("colors.beige");
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Noto Sans KR", sans-serif;
+  /* 모바일 기준 컴포넌트 최소 너비 */
+  min-width: 600px; 
 }
+
+/* 메인페이지 스타일 커스텀텀  */
+.main-p-10 {
+  padding: 1.5rem;
+}
+.main-limit-width {
+  margin:auto;
+  max-width: 1000px;
+}
+
+/* 반응형 커스텀 스타일 */
+@media (min-width: 768px) {
+  body {
+    /* background-color: lightblue; */
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    /* background-color: lightgreen; */
+  }
+
+}
+
+
