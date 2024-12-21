@@ -1,26 +1,39 @@
 package todo.todo.controller;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import todo.todo.domain.Todo;
-import todo.todo.repository.TodoRepository;
+
+import java.util.List;
+import todo.todo.service.TodoService;
 
 import java.util.List;
 
-@RestController //restapi 컨트롤러
+@RestController
 @RequiredArgsConstructor // 생성자 생략
 @RequestMapping("/api/todos")
 public class TodoController {
-    private final TodoRepository todoRepository;
+
+    private final TodoService todoService;
 
     @GetMapping("/")
-    public List<Todo> getTodos() {
-        return todoRepository.findAll();
+    public List<Todo> getAllTodos() {
+        return todoService.getAllTodos();
     }
 
-    @PostMapping("/add")
-    public Todo addTodo(@RequestBody Todo todo) {
-        return todoRepository.save(todo);
+    @GetMapping("/{userId}")
+    public List<Todo> getTodos(@PathVariable Integer userId) {
+        return todoService.getTodosByUserId(userId);
+    }
+
+    @PostMapping("/")
+    public Todo createTodo(@RequestBody Todo todo) {
+        System.out.print("Post 요청 입력");
+        return todoService.addTodo(todo);
+    }
+
+    @DeleteMapping("/{todoId}")
+    public void deleteTodo(@PathVariable Integer todoId) {
+        todoService.deleteTodoById(todoId);
     }
 }

@@ -8,30 +8,33 @@ export default function Main() {
   function onClick (){
     setisShownAll(prev => !prev);
   }
-  //   const [todoList, setTodoList] = useState([]);
+    const [todoList, setTodoList] = useState([]);
 
-  //   useEffect(() => {
-  //     const loadTodos = async () => {
-  //       try {
-  //         const data = await todos();
-  //         setTodoList(data);
-  //       } catch (e) {
-  //         throw e;
-  //       }
-  //     };
-  //     loadTodos();
-  //   });
+    useEffect(() => {
+      const loadTodos = async () => {
+        try {
+          const data = await todos();
+          setTodoList(data);
+        } catch (e) {
+          throw e;
+        }
+      };
+      loadTodos();
+    }, []);
 
-  const todoList = [
-    {
-      id: 1,
-      todo: "알고리즘 풀기",
-    },
-    {
-      id: 2,
-      todo: "운동하기",
-    },
-  ];
+    console.log(todoList);
+    
+  // const todoList = [
+  //   {
+  //     id: 1,
+  //     todo: "알고리즘 풀기",
+  //   },
+  //   {
+  //     id: 2,
+  //     todo: "운동하기",
+  //   },
+  // ];
+
   // tailwind 컨벤션
   // 컴포넌트 역할: header,
   // 레이아웃: flex, grid 등

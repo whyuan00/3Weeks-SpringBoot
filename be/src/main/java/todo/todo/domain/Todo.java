@@ -1,22 +1,45 @@
 package todo.todo.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
-@Entity(name="Todo") // 투두 엔티티 등록
-@Table(name="todo") // 투두 테이블 생성
-@NoArgsConstructor // lombok: 생성자 생략
-@Getter // lombok: 게터 생성
-@Setter // lombok: 세터 생성
+import java.time.LocalDateTime;
+import java.util.List;
 
+@Entity(name = "Todo")
+@Table(name = "Todo")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Todo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer todoId;
 
-    @NotNull
-    private String todo; //투두 필드
+    @Column(length = 50)
+    private String title;
+
+    @Column(length = 255)
+    private String content;
+
+    @Nullable
+    private LocalDateTime createdAt;
+
+    @Nullable
+    private LocalDateTime updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @OneToMany(mappedBy = "todo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
+
+    @OneToMany(mappedBy = "todo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Like> likes;
 }
+

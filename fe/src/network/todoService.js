@@ -1,6 +1,7 @@
 import axiosInstance from "./axios";
 
 export const todos = async()=>{
-        return await axiosInstance.get("/todos/").data
+        const response = await axiosInstance.get("/todos/")
+        return response.data
 }
 
