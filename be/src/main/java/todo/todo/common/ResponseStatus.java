@@ -1,11 +1,12 @@
 package todo.todo.common;
 
-public interface ResponseCode {
+public interface ResponseStatus {
     // 인터페이스는 무조건 public static final로 인식함
 //       public static final String SUCCESS = "SU";
 
     // http status 200
-    String SUCCESS = "SU";
+    String SUCCESS = "OK";
+    String CREATED = "CREATED";
     //400
     String VALIDATION_FAILED = "VF";
     String DUPLICATE_USERNAME = "DU";

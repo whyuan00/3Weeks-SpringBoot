@@ -19,12 +19,12 @@ public class JwtProvider {
     private String secretKey;
 
 //    이메일 받아서 웹토큰으로 만들어줌
-    public String create(String email) {
+    public String create(String username) {
 //        한시간 토큰
         Date expiredDate = Date.from(Instant.now().plus(1, ChronoUnit.HOURS));
         String jwt = Jwts.builder()
                 .signWith(SignatureAlgorithm.ES256, secretKey)
-                .setSubject(email).setIssuedAt(new Date()).setExpiration(expiredDate)
+                .setSubject(username).setIssuedAt(new Date()).setExpiration(expiredDate)
                 .compact();
         return jwt;
     }

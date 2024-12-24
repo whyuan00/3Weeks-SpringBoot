@@ -4,6 +4,7 @@ public interface ResponseMessage {
 
     // http status 200
     String SUCCESS = "Success";
+    String CREATED = "Created";
     //400
     String VALIDATION_FAILED = "Validation failed";
     String DUPLICATE_USERNAME = "Duplicate username";
