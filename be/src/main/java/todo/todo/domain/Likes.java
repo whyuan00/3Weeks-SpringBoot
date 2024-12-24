@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import todo.todo.repository.pk.LikesPk;
 
-@Entity(name="Likes") // 투두 엔티티 등록
+@Entity // 투두 엔티티 등록
 @Table(name="likes") // 투두 테이블 생성
 @NoArgsConstructor // lombok: 생성자 생략
 @Getter // lombok: 게터 생성

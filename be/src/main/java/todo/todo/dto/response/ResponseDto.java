@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import todo.todo.common.ResponseCode;
+import todo.todo.common.ResponseStatus;
 import todo.todo.common.ResponseMessage;
 
 @Getter
@@ -16,7 +16,7 @@ public class ResponseDto {
 
     // 500 에러
     public static ResponseEntity<ResponseDto> databseError(){
-        ResponseDto responseBody = new ResponseDto(ResponseCode.DATABASE_ERROR, ResponseMessage.DATABASE_ERROR);
+        ResponseDto responseBody = new ResponseDto(ResponseStatus.DATABASE_ERROR, ResponseMessage.DATABASE_ERROR);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody);
     }
     // 나머지 에러

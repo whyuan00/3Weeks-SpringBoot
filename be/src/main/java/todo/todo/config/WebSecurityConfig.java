@@ -29,6 +29,7 @@ import java.io.IOException;
 public class WebSecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    @Bean
     protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .cors(cors -> cors
@@ -40,8 +41,9 @@ public class WebSecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/","/api/**","/file/**").permitAll()
+                        .requestMatchers("/api/auth/signup").permitAll()  // 회원가입 POST 요청 허용
                         .requestMatchers(HttpMethod.GET,"/api/**").permitAll()
+                        .requestMatchers("/","/file/**").permitAll()
                         .anyRequest().authenticated()
                 )
 //                인증 실패시 처리
