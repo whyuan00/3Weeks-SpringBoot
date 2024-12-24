@@ -15,8 +15,12 @@ import lombok.Setter;
 public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private int todoId;
     @NotNull
-    private String todo; //투두 필드
+    private String title;
+    @NotNull
+    private String content;
+    private String createdAt;
+    private String updatedAt;
+    private int userId;
 }
