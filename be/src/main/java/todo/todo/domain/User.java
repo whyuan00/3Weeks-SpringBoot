@@ -7,11 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import todo.todo.dto.request.SignupRequestDto;
 
-@Getter
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name="users") //orm 어노테이션, 어떤 테이블과 mapping시킬지 지정
+@Getter
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
@@ -20,12 +22,17 @@ public class User {
     @NotNull
     private String password;
     private String nickname;
-    private String createdAt;
+    private LocalDateTime createdAt;
     private String profileImage;
 
     public User(SignupRequestDto dto){
         this.username = dto.getUsername();
         this.password = dto.getPassword();
         this.nickname = dto.getNickname();
+    }
+    // 엔티티 저장 전 호출
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
     }
 }

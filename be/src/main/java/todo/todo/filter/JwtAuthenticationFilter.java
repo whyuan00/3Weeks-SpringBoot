@@ -67,7 +67,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 //       여기까지 오면 Bearer 인증 방식 맞음, 7번 인덱스 부터 꺼내오기
         String token = authorization.substring(7);
-        System.out.println("token:"+token);
+//        System.out.println("token:"+token);
         return token;
     }
 
