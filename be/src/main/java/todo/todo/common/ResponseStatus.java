@@ -7,13 +7,15 @@ public interface ResponseStatus {
     // http status 200
     String SUCCESS = "OK";
     String CREATED = "CREATED";
+
     //400
     String VALIDATION_FAILED = "VF";
+    //409
     String DUPLICATE_USERNAME = "DU";
     String DUPLICATE_NICKNAME = "DN";
-    String DUPLICATE_TEL_NUMBER = "DT";
+//    String DUPLICATE_TEL_NUMBER = "DT";
     String NOT_EXISTED_USER = "NU";
-    String NOT_EXISTED_BOARD = "NB";
+    String NOT_EXISTED_TODO = "NB";
 
     //401
     String SIGN_IN_FAIL = "SF";

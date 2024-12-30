@@ -24,6 +24,7 @@ public class AuthServiceImplement implements AuthService{
 
     @Override
     public ResponseEntity<? super SignupResponseDto> signup(SignupRequestDto dto) {
+//        System.out.println("Singup method called");
        try{
 
         String username = dto.getUsername();
@@ -50,23 +51,25 @@ public class AuthServiceImplement implements AuthService{
 
     @Override
     public ResponseEntity<? super LoginResponseDto> login(LoginRequestDto dto) {
+//        System.out.println("Login method called");
         String token = null;
         try{
             String username = dto.getUsername();
             User user = userRepository.findByUsername(username);
-            if (user == null) return LoginResponseDto.loginFailed();
+            if (user == null) return LoginResponseDto.loginFailedInvalidUsername();
 
             String password = dto.getPassword();
             String encodedPassword = user.getPassword();
             // 암호화된 비번이랑 입력된 비번 비교
             boolean isMatched = passwordEncoder.matches(password, encodedPassword);
-            if (!isMatched) return LoginResponseDto.loginFailed();
+            if (!isMatched) return LoginResponseDto.loginFailedIncorrectPassword();
+
             token = jwtProvider.create(username);
 
         }catch(Exception exception){
             exception.printStackTrace();
             return ResponseDto.databseError();
         }
-        return LoginResponseDto.success(token);
+        return LoginResponseDto.loginSuccess(token);
     }
 }

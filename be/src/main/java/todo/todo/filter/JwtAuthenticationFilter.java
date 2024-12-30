@@ -33,15 +33,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
                 return;
             }
-            String email = jwtProvider.validate(token);
-            if(email == null){
+            String username = jwtProvider.validate(token);
+            if(username == null){
                 filterChain.doFilter(request, response);
                 return;
             }
 
         // 다 패스하면 context에 등록
         AbstractAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(email, null, AuthorityUtils.NO_AUTHORITIES);
+                new UsernamePasswordAuthenticationToken(username, null, AuthorityUtils.NO_AUTHORITIES);
         // 웹 인증 세부 정보 설정
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         // 빈 context 추가
@@ -67,6 +67,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 //       여기까지 오면 Bearer 인증 방식 맞음, 7번 인덱스 부터 꺼내오기
         String token = authorization.substring(7);
+        System.out.println("token:"+token);
         return token;
     }
 
