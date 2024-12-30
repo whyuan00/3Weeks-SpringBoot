@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity// 투두 엔티티 등록
 @Table(name="todos") // 투두 테이블 생성
 @NoArgsConstructor // lombok: 생성자 생략
@@ -19,7 +21,21 @@ public class Todo {
     private String title;
     @NotNull
     private String content;
-    private String createdAt;
-    private String updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private int userId;
+
+
+    // 엔티티 저장 전 호출
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    // 엔티티 업데이트 전 호출
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 }

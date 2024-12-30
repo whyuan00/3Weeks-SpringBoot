@@ -26,7 +26,6 @@ public class AuthServiceImplement implements AuthService{
     public ResponseEntity<? super SignupResponseDto> signup(SignupRequestDto dto) {
 //        System.out.println("Singup method called");
        try{
-
         String username = dto.getUsername();
         boolean existedUsername = userRepository.existsByUsername(username);
         if (existedUsername) return SignupResponseDto.duplicateUsername();

@@ -12,5 +12,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     boolean existsByNickname(String nickname);
 
     // 쿼리 메서드 jpa 가 자동작성해줌
+//    User findById(int userId); // jparepo가 제공하는 기본메서드임
     User findByUsername(String username);
 }
