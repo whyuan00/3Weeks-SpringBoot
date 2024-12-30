@@ -20,14 +20,19 @@ public class LoginResponseDto extends ResponseDto{
     }
 
     // 로그인 성공시 로직
-    public static ResponseEntity<LoginResponseDto> success(String token){
+    public static ResponseEntity<LoginResponseDto> loginSuccess(String token){
         LoginResponseDto result = new LoginResponseDto(token);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    // 로그인 실패시 로직
-    public static ResponseEntity<ResponseDto> loginFailed(){
-        return ResponseDto.error(ResponseStatus.SIGN_IN_FAIL, ResponseMessage.SIGN_IN_FAIL, HttpStatus.UNAUTHORIZED);
+    // 로그인 실패시
+    // username 에러
+    public static ResponseEntity<ResponseDto> loginFailedInvalidUsername(){
+        return ResponseDto.error(ResponseStatus.SIGN_IN_FAIL, ResponseMessage.USERNAME_ERROR, HttpStatus.UNAUTHORIZED);
+    }
+    // passowrd mismatch
+    public static ResponseEntity<ResponseDto> loginFailedIncorrectPassword(){
+        return ResponseDto.error(ResponseStatus.SIGN_IN_FAIL, ResponseMessage.PASSWORD_MISMATCH, HttpStatus.UNAUTHORIZED);
     }
 
 }

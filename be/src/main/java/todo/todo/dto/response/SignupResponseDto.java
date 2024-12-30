@@ -20,11 +20,11 @@ public class SignupResponseDto extends ResponseDto{
 
     // 유저네임 중복시 응답
     public static ResponseEntity<ResponseDto> duplicateUsername(){
-        return ResponseDto.error(ResponseStatus.DUPLICATE_USERNAME, ResponseMessage.DUPLICATE_USERNAME,HttpStatus.BAD_REQUEST);
+        return ResponseDto.error(ResponseStatus.DUPLICATE_USERNAME, ResponseMessage.DUPLICATE_USERNAME,HttpStatus.CONFLICT);
     }
     // 닉네임 중복시 응답
     public static ResponseEntity<ResponseDto> duplicateNickname(){
-        return ResponseDto.error(ResponseStatus.DUPLICATE_NICKNAME, ResponseMessage.DUPLICATE_NICKNAME,HttpStatus.BAD_REQUEST);
+        return ResponseDto.error(ResponseStatus.DUPLICATE_NICKNAME, ResponseMessage.DUPLICATE_NICKNAME,HttpStatus.CONFLICT);
     }
 
 

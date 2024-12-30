@@ -19,15 +19,18 @@ public class JwtProvider {
     private String secretKey;
 
 //    이메일 받아서 웹토큰으로 만들어줌
+// HS256은 대칭키 기반 알고리즘, 하나의 비밀키만 가져서 속도 빠르고 토큰 비교적 작음
     public String create(String username) {
 //        한시간 토큰
         Date expiredDate = Date.from(Instant.now().plus(1, ChronoUnit.HOURS));
         String jwt = Jwts.builder()
-                .signWith(SignatureAlgorithm.ES256, secretKey)
+                .signWith(SignatureAlgorithm.HS256, secretKey)
                 .setSubject(username).setIssuedAt(new Date()).setExpiration(expiredDate)
                 .compact();
         return jwt;
     }
+//ES256은 비대칭키 알고리즘. 비밀키로 서명생성/공개키로 검증해서 보안 수준 높음. 토큰크기 작고 성능 우수
+// 공개api, 다중사용자 환경에서 주로 사용
 
 // jwt 검증 메서드
     public String validate(String jwt){

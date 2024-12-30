@@ -19,10 +19,16 @@ public class ResponseDto {
         ResponseDto responseBody = new ResponseDto(ResponseStatus.DATABASE_ERROR, ResponseMessage.DATABASE_ERROR);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody);
     }
+    // 400 validation에러 (
+      public static ResponseEntity<ResponseDto> validationError(){
+        ResponseDto responseBody = new ResponseDto(ResponseStatus.VALIDATION_FAILED, ResponseMessage.VALIDATION_FAILED);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
+    }
     // 나머지 에러
     public static ResponseEntity<ResponseDto> error(String code, String message, HttpStatus status) {
         ResponseDto responseBody = new ResponseDto(code, message);
         return ResponseEntity.status(status).body(responseBody);
     }
+
 
 }
