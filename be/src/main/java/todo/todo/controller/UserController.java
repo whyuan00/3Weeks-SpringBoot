@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import todo.todo.dto.response.GetUserResponseDto;
 import todo.todo.dto.response.GetUsersResponseDto;
-import todo.todo.service.UserService;
+import todo.todo.service.service.UserService;
 
 @RestController
 @RequestMapping("/api/user")

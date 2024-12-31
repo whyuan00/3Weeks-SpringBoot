@@ -1,4 +1,4 @@
-package todo.todo.service;
+package todo.todo.service.service;
 
 import org.springframework.http.ResponseEntity;
 import todo.todo.dto.response.GetUserResponseDto;

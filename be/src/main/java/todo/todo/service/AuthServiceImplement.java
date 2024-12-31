@@ -13,10 +13,11 @@ import todo.todo.dto.response.LoginResponseDto;
 import todo.todo.dto.response.ResponseDto;
 import todo.todo.dto.response.SignupResponseDto;
 import todo.todo.repository.UserRepository;
+import todo.todo.service.service.AuthService;
 
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImplement implements AuthService{
+public class AuthServiceImplement implements AuthService {
 
     private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
