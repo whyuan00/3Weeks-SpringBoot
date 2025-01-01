@@ -2,10 +2,12 @@ package todo.todo.filter;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import todo.todo.config.CustomUser;
 import todo.todo.config.JwtProvider;
 
 import org.springframework.stereotype.Component;
@@ -16,6 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+import todo.todo.domain.User;
 
 import java.io.IOException;
 
@@ -33,15 +36,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
                 return;
             }
-            String username = jwtProvider.validate(token);
-            if(username == null){
+
+            CustomUser customUser = jwtProvider.validate(token);
+            if(customUser == null){
                 filterChain.doFilter(request, response);
                 return;
             }
 
         // 다 패스하면 context에 등록
         AbstractAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(username, null, AuthorityUtils.NO_AUTHORITIES);
+                new UsernamePasswordAuthenticationToken(customUser, null, AuthorityUtils.NO_AUTHORITIES);
         // 웹 인증 세부 정보 설정
         authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         // 빈 context 추가

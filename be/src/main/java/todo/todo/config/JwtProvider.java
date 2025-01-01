@@ -1,11 +1,13 @@
 package todo.todo.config;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import todo.todo.domain.User;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -18,14 +20,16 @@ public class JwtProvider {
     @Value("${secret-key}")
     private String secretKey;
 
-//    이메일 받아서 웹토큰으로 만들어줌
+//    사용자 정보 받아서 웹토큰으로 만들어줌
 // HS256은 대칭키 기반 알고리즘, 하나의 비밀키만 가져서 속도 빠르고 토큰 비교적 작음
-    public String create(String username) {
+    public String create(User user) {
 //        한시간 토큰
         Date expiredDate = Date.from(Instant.now().plus(1, ChronoUnit.HOURS));
         String jwt = Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, secretKey)
-                .setSubject(username).setIssuedAt(new Date()).setExpiration(expiredDate)
+                .setSubject(user.getUsername())
+                .claim("userId",user.getUserId())
+                .setIssuedAt(new Date()).setExpiration(expiredDate)
                 .compact();
         return jwt;
     }
@@ -33,9 +37,8 @@ public class JwtProvider {
 // 공개api, 다중사용자 환경에서 주로 사용
 
 // jwt 검증 메서드
-    public String validate(String jwt){
+    public CustomUser validate(String jwt){
         Claims claims = null;
-
         try {
             claims = Jwts.parser().setSigningKey(secretKey)
                     .parseClaimsJws(jwt).getBody();
@@ -43,7 +46,10 @@ public class JwtProvider {
             exception.printStackTrace();
             return null;
         }
-        return claims.getSubject();
+        String username = claims.getSubject();
+        Integer userId = claims.get("userId", Integer.class);
+        return new CustomUser(userId, username);
     }
+
 
 }

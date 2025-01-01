@@ -19,7 +19,7 @@ public class UserController {
 
     @GetMapping("")
     public ResponseEntity<? super GetUserResponseDto> getUser(
-            @AuthenticationPrincipal String username, //인증된 사용자 받기,filter의 context에서 꺼내옴
+//            @AuthenticationPrincipal String username, //인증된 사용자 받기,filter의 context에서 꺼내옴
             @RequestParam int userId
     ){
         ResponseEntity<? super GetUserResponseDto> response = userService.getUser(userId);
@@ -28,7 +28,7 @@ public class UserController {
 
     @GetMapping("/findAll")
     public ResponseEntity<? super GetUsersResponseDto> getUsers(
-            @AuthenticationPrincipal String username
+//            @AuthenticationPrincipal String username
     ){
         return userService.getUsers();
     }

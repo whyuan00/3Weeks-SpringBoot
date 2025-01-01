@@ -43,7 +43,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/auth/signup").permitAll()  // 회원가입은 인증 불필요
                         .requestMatchers("/api/auth/login").permitAll()  // 회원가입은 인증 불필요
-                        .requestMatchers(HttpMethod.GET,"/api/**").permitAll()
+//                        .requestMatchers(HttpMethod.GET,"/api/**").permitAll()
                         .requestMatchers("/","/file/**").permitAll()
                         .anyRequest().authenticated()
                 )
