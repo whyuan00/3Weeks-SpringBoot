@@ -30,6 +30,14 @@ public class User {
         this.password = dto.getPassword();
         this.nickname = dto.getNickname();
     }
+
+    public String getProfileImage(){
+        return profileImage;
+    }
+    public void setProfileImage(String profileImage){
+        this.profileImage = profileImage;
+    }
+
     // 엔티티 저장 전 호출
     @PrePersist
     protected void onCreate() {

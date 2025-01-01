@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import todo.todo.dto.request.LoginRequestDto;
 import todo.todo.dto.request.SignupRequestDto;
 import todo.todo.dto.response.LoginResponseDto;
-import todo.todo.dto.response.ResponseDto;
 import todo.todo.dto.response.SignupResponseDto;
-import todo.todo.service.AuthService;
+import todo.todo.service.service.AuthService;
 
 @RestController
 @RequestMapping("/api/auth")

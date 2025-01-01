@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import todo.todo.dto.response.GetUserResponseDto;
 import todo.todo.dto.response.GetUsersResponseDto;
-import todo.todo.service.UserService;
+import todo.todo.service.service.UserService;
 
 @RestController
 @RequestMapping("/api/user")
@@ -19,7 +19,7 @@ public class UserController {
 
     @GetMapping("")
     public ResponseEntity<? super GetUserResponseDto> getUser(
-            @AuthenticationPrincipal String username, //인증된 사용자 받기,filter의 context에서 꺼내옴
+//            @AuthenticationPrincipal String username, //인증된 사용자 받기,filter의 context에서 꺼내옴
             @RequestParam int userId
     ){
         ResponseEntity<? super GetUserResponseDto> response = userService.getUser(userId);
@@ -28,7 +28,7 @@ public class UserController {
 
     @GetMapping("/findAll")
     public ResponseEntity<? super GetUsersResponseDto> getUsers(
-            @AuthenticationPrincipal String username
+//            @AuthenticationPrincipal String username
     ){
         return userService.getUsers();
     }
