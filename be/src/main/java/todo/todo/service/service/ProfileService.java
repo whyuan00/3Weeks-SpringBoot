@@ -9,5 +9,5 @@ import todo.todo.dto.response.UploadFileResponseDto;
 public interface ProfileService {
     ResponseEntity<? super UploadFileResponseDto> uploadProfileImage(MultipartFile file, int userId); // 프로필 이미지 업로드
     ResponseEntity<Resource> getProfileImage(int userId); // 프로필 이미지 가져오기
-    ResponseEntity<String> deleteProfileImage(int userId); // 프로필 이미지 삭제
+    ResponseEntity<ResponseDto> deleteProfileImage(int userId); // 프로필 이미지 삭제
 }

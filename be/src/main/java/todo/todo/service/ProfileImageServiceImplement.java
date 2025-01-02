@@ -7,6 +7,7 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import todo.todo.common.ResponseMessage;
 import todo.todo.common.ResponseStatus;
 import todo.todo.domain.User;
 import todo.todo.dto.response.ResponseDto;
@@ -113,13 +114,12 @@ public class ProfileImageServiceImplement implements ProfileService {
     }
 
     @Override
-    public ResponseEntity<String> deleteProfileImage(int userId) {
+    public ResponseEntity<ResponseDto> deleteProfileImage(int userId) {
         try{
             Optional<User> user = userRepository.findById(userId);
             if (user.isEmpty()){
-                return ResponseEntity.notFound().build();
+                return ResponseDto.error(ResponseStatus.NOT_EXIST_PROFILEIMAGE, ResponseMessage.NOT_EXIST_PROFILEIMAGE, HttpStatus.NOT_FOUND);
             }
-
             String username = user.get().getUsername();
             String profileImage = user.get().getProfileImage();
 
@@ -131,11 +131,11 @@ public class ProfileImageServiceImplement implements ProfileService {
             user.get().setProfileImage(null);
             userRepository.save(user.get());
 
-            return ResponseEntity.ok("profileimage deleted");
+            return ResponseDto.success(ResponseStatus.SUCCESS, ResponseMessage.DELETED, HttpStatus.OK);
 
         }catch(Exception exception){
-            exception.printStackTrace();;
-            return ResponseEntity.internalServerError().body("delete failed");
+            exception.printStackTrace();
+            return ResponseDto.databseError();
         }
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import todo.todo.config.CustomUser;
+import todo.todo.dto.response.ResponseDto;
 import todo.todo.dto.response.UploadFileResponseDto;
 import todo.todo.service.service.ProfileService;
 
@@ -36,7 +37,7 @@ public class ProfileImageController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteProfileImage(
+    public ResponseEntity<ResponseDto> deleteProfileImage(
 //            @RequestParam("userId") int userId
             @AuthenticationPrincipal CustomUser customUser
             ){
