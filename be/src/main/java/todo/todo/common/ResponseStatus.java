@@ -21,6 +21,7 @@ public interface ResponseStatus {
     // 404
     String NOT_EXIST_USER = "NU";
     String NOT_EXIST_TODO = "NB";
+    String NOT_EXIST_PROFILEIMAGE = "NP";
 
     //409
     String DUPLICATE_USERNAME = "DU";

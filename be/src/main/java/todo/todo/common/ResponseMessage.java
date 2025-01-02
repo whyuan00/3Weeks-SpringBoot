@@ -5,6 +5,7 @@ public interface ResponseMessage {
     // http status 200
     String SUCCESS = "status 200 Success";
     String CREATED = "status 200 Created";
+    String DELETED = "status 200 Deleted";
 
     //400 Bad request
     String VALIDATION_FAILED = "status 400 Validation failed";
@@ -20,7 +21,7 @@ public interface ResponseMessage {
     // 404 not found
     String NOT_EXIST_USER = "status 404 This user does not exist.";
     String NOT_EXIST_TODO = "status 404 This todo does not exist";
-
+    String NOT_EXIST_PROFILEIMAGE = "status 404 Profileimage does not exist";
     // 409 Confilct 서버 정보와 충돌할때
     String DUPLICATE_USERNAME = "status 409 Duplicate username";
     String DUPLICATE_NICKNAME = "status 409 Duplicate nickname";
