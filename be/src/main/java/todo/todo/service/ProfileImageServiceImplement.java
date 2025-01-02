@@ -4,12 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import todo.todo.common.ResponseStatus;
 import todo.todo.domain.User;
+import todo.todo.dto.response.ResponseDto;
+import todo.todo.dto.response.UploadFileResponseDto;
 import todo.todo.repository.UserRepository;
 import todo.todo.service.service.ProfileService;
 
@@ -17,6 +18,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -67,9 +69,9 @@ public class ProfileImageServiceImplement implements ProfileService {
     }
 
     @Override
-    public ResponseEntity<String> uploadProfileImage(MultipartFile file, int userId) {
-        System.out.println("here: "+userId);
-        if (file.isEmpty()) return ResponseEntity.badRequest().body("file is empty");
+    public ResponseEntity<? super UploadFileResponseDto> uploadProfileImage(MultipartFile file, int userId) {
+
+        if (file.isEmpty()) return ResponseDto.validationError();
 
         Optional<User> user = userRepository.findById(userId);
         if (user.isEmpty()) return ResponseEntity.notFound().build();
@@ -95,10 +97,19 @@ public class ProfileImageServiceImplement implements ProfileService {
 
         } catch(Exception exception){
             exception.printStackTrace();
-            return ResponseEntity.internalServerError().body("failed to save file");
+            return ResponseDto.databseError();
         }
-        String url = fileUrl + username + "/" + saveFileName;
-        return ResponseEntity.status(HttpStatus.OK).body(url);
+        String url = userDir + saveFileName;
+
+        UploadFileResponseDto.Response response = new UploadFileResponseDto.Response(
+            originalFileName,
+                saveFileName,
+                extension,
+                savePath,
+                LocalDateTime.now()
+        );
+
+        return UploadFileResponseDto.uploadSuccess(response);
     }
 
     @Override
